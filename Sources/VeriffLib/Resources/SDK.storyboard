@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -195,7 +196,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="3HG-Ji-DVg" kind="unwind" unwindAction="unwindToScanFace:" id="aUl-sZ-PUr"/>
+                                            <segue destination="3HG-Ji-DVg" kind="unwind" unwindAction="unwindDoneToScanFace:" id="zHl-Mu-dWG"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LyD-zE-4Dg">
@@ -215,7 +216,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="3HG-Ji-DVg" kind="unwind" unwindAction="unwindToScanFace:" id="zAK-Hm-Sza"/>
+                                            <segue destination="3HG-Ji-DVg" kind="unwind" unwindAction="unwindRetakeToScanFace:" id="f7d-oN-efl"/>
                                         </connections>
                                     </button>
                                 </subviews>

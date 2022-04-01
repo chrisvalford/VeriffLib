@@ -15,11 +15,6 @@ import Vision
 
 public class FaceResultViewController: UIViewController {
     
-    enum ButtonTag: Int {
-        case done = 0
-        case retake = 1
-    }
-    
 //    var delegate: FaceResultDelegate?
     @IBOutlet var photoView: UIImageView?
     
@@ -32,19 +27,4 @@ public class FaceResultViewController: UIViewController {
 //        delegate?.retake()
 //        self.navigationController?.dismiss(animated: true)
 //    }
-    
-    public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let button = sender as? UIButton else { return }
-        if segue.identifier == "unwindToScanFace" {
-            let destination = segue.destination as! ScanFaceViewController
-            switch ButtonTag(rawValue: button.tag) {
-            case .done:
-                destination.segueMessage = "done"
-            case .retake:
-                destination.segueMessage = "retake"
-            default:
-                return
-            }
-        }
-    }
 }

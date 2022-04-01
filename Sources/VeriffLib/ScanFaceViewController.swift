@@ -33,9 +33,6 @@ public class ScanFaceViewController: UIViewController {
     var ciImage: CIImage?
     var landmarkObservation: VNFaceObservation?
     
-    // Unwind segue message
-    var segueMessage = ""
-    
     public override func viewDidLoad() {
         super.viewDidLoad()
         configureCaptureSession()
@@ -199,18 +196,18 @@ extension ScanFaceViewController {
         }
     }
     
-    @IBAction func unwindToScanFace(_ unwindSegue: UIStoryboardSegue) {
-        if segueMessage == "dome" {
+    @IBAction func unwindDoneToScanFace(_ unwindSegue: UIStoryboardSegue) {
             saveButton.isEnabled = true
             //self.navigationController?.dismiss(animated: true)
 //            presentingViewController?.dismiss(animated: true)
-        } else if segueMessage == "retake" {
+        }
+    
+    @IBAction func unwindRetakeToScanFace(_ unwindSegue: UIStoryboardSegue) {
             saveButton.isEnabled = false
             photoView.image = nil
             self.session.startRunning()
             //self.navigationController?.dismiss(animated: true)
 //            presentingViewController?.dismiss(animated: true)
-        }
     }
     
 //    public override func performSegue(withIdentifier identifier: String, sender: Any?) {
