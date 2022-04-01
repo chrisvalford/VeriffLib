@@ -41,7 +41,7 @@ public class ScanDocumentViewController: UIViewController {
                         guard let candidate = observation.topCandidates(maximumCandidates).first else { continue }
                         self.documentTexts.append(candidate.string)
                     }
-
+                    self.tableView.reloadData()
                 }
             }
         })
