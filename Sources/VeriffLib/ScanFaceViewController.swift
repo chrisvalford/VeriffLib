@@ -198,7 +198,7 @@ extension ScanFaceViewController {
         let storyboard = UIStoryboard(name: "SDK", bundle: Bundle.module)
         guard let faceResultViewController = storyboard.instantiateViewController(withIdentifier: "faceResultViewController") as? FaceResultViewController else { return }
         faceResultViewController.delegate = self
-        navigationController?.show(faceResultViewController, sender: self)
+        navigationController?.present(faceResultViewController, animated: true)
     }
     
     private func takeSnapshot() {
@@ -220,12 +220,14 @@ extension ScanFaceViewController {
 extension ScanFaceViewController: FaceResultDelegate {
     func done() {
         saveButton.isEnabled = true
+        self.navigationController?.dismiss(animated: true)
     }
     
     func retake() {
         saveButton.isEnabled = false
         photoView.image = nil
         self.session.startRunning()
+        self.navigationController?.dismiss(animated: true)
     }
     
     
