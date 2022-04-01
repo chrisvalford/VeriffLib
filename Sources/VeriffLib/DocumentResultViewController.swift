@@ -51,10 +51,7 @@ public class DocumentResultViewController: UIViewController {
     }
     
     @IBAction func doneTap(_ sender: UIButton) {
-        guard let controllers = self.navigationController?.viewControllers else { return }
-        for controller in  controllers {
-            controller.dismiss(animated: true)
-        }
+        dismiss(animated: true)
     }
 }
 
