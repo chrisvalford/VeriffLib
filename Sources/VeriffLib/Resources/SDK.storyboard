@@ -171,10 +171,12 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B2J-dU-yax">
                                 <rect key="frame" x="20" y="799" width="374" height="63"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qdp-dZ-Sam">
-                                        <rect key="frame" x="12" y="16" width="59" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qdp-dZ-Sam">
+                                        <rect key="frame" x="12" y="16.5" width="80" height="30"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="dCD-AX-jG1"/>
+                                        </constraints>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Done">
@@ -189,10 +191,12 @@
                                             <action selector="doneTap:" destination="jo9-pX-05J" eventType="touchUpInside" id="duz-Kj-0Uo"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LyD-zE-4Dg">
-                                        <rect key="frame" x="306" y="16" width="69" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LyD-zE-4Dg">
+                                        <rect key="frame" x="294" y="16.5" width="80" height="30"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="Rhe-qH-a1o"/>
+                                        </constraints>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Retake">
@@ -210,7 +214,11 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="qdp-dZ-Sam" firstAttribute="leading" secondItem="B2J-dU-yax" secondAttribute="leading" constant="12" id="0iq-y9-4lk"/>
                                     <constraint firstAttribute="height" constant="63" id="Lps-gQ-gas"/>
+                                    <constraint firstAttribute="trailing" secondItem="LyD-zE-4Dg" secondAttribute="trailing" id="YiS-Ap-oEe"/>
+                                    <constraint firstItem="LyD-zE-4Dg" firstAttribute="centerY" secondItem="B2J-dU-yax" secondAttribute="centerY" id="ajx-XW-acM"/>
+                                    <constraint firstItem="qdp-dZ-Sam" firstAttribute="centerY" secondItem="B2J-dU-yax" secondAttribute="centerY" id="cN5-qj-n56"/>
                                 </constraints>
                             </view>
                         </subviews>
