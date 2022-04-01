@@ -9,7 +9,7 @@ import UIKit
 
 class ScanDocumentTableViewCell: UITableViewCell {
     
-    @IBOutlet var scannedText: UILabel!
+    @IBOutlet weak var scannedText: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

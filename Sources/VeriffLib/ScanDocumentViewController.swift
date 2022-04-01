@@ -101,7 +101,7 @@ extension ScanDocumentViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "DocumentTextCell", for: indexPath) as? ScanDocumentTableViewCell else {
             return UITableViewCell()
         }
-        cell.scannedText.text = documentTexts[indexPath.row]
+        cell.scannedText?.text = documentTexts[indexPath.row]
         return cell
     }
 }
