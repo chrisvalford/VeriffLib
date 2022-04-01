@@ -51,7 +51,10 @@ public class DocumentResultViewController: UIViewController {
     }
     
     @IBAction func doneTap(_ sender: UIButton) {
-        self.navigationController?.popToRootViewController(animated: true) //dismiss(animated: true)
+        guard let vc = self.presentingViewController else { return }
+        while (vc.presentingViewController != nil) {
+            vc.dismiss(animated: true, completion: nil)
+        }
     }
 }
 
