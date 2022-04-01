@@ -15,24 +15,33 @@ public class ScanDocumentViewController: UIViewController {
     let documentCameraViewController = VNDocumentCameraViewController()
     var textRecognitionRequest = VNRecognizeTextRequest()
     var faceRecognitionRequest = VNDetectFaceRectanglesRequest()
-    var image: UIImage?
     
     @IBOutlet var imageView: UIImageView!
+    @IBOutlet var tableView: UITableView!
+    
+    private var documentTexts: [String] = []
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-        let storyboard = UIStoryboard(name: "SDK", bundle: .module)
-        resultsViewController = storyboard.instantiateViewController(withIdentifier: "documentResultViewController") as? DocumentResultViewController
+//        let storyboard = UIStoryboard(name: "SDK", bundle: .module)
+//        resultsViewController = storyboard.instantiateViewController(withIdentifier: "documentResultViewController") as? DocumentResultViewController
         textRecognitionRequest = VNRecognizeTextRequest(completionHandler: { (request, error) in
-            guard let resultsViewController = self.resultsViewController else {
-                print("resultsViewController is not set")
-                return
-            }
+//            guard let resultsViewController = self.resultsViewController else {
+//                print("resultsViewController is not set")
+//                return
+//            }
             if let results = request.results, !results.isEmpty {
                 if let requestResults = request.results as? [VNRecognizedTextObservation] {
-                    DispatchQueue.main.async {
-                        resultsViewController.addRecognizedText(recognizedText: requestResults)
+//                    DispatchQueue.main.async {
+//                        resultsViewController.addRecognizedText(recognizedText: requestResults)
+//                    }
+                    // Create a full transcript to run analysis on.
+                    let maximumCandidates = 1
+                    for observation in requestResults {
+                        guard let candidate = observation.topCandidates(maximumCandidates).first else { continue }
+                        self.documentTexts.append(candidate.string)
                     }
+
                 }
             }
         })
@@ -48,7 +57,7 @@ public class ScanDocumentViewController: UIViewController {
             }
             
             DispatchQueue.main.async {
-                resultsViewController.addRecognizedFaces(image: self.image, recognizedFaces: requestResults)
+                resultsViewController.addRecognizedFaces(image: self.imageView.image, recognizedFaces: requestResults)
             }
         })
         
@@ -76,11 +85,29 @@ extension ScanDocumentViewController: VNDocumentCameraViewControllerDelegate {
     public func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
         for pageNumber in 0 ..< scan.pageCount {
             let image = scan.imageOfPage(at: pageNumber)
-            self.image = image
             self.imageView.image = image
             processImage(image: image)
         }
         self.dismiss(animated: true)
-        self.present(resultsViewController!, animated: true)
     }
 }
+
+extension ScanDocumentViewController: UITableViewDataSource {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return documentTexts.count
+    }
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "DocumentTextCell", for: indexPath) as? ScanDocumentTableViewCell else {
+            return UITableViewCell()
+        }
+        cell.scannedText.text = documentTexts[indexPath.row]
+        return cell
+    }
+}
+
+//extension ScanDocumentViewController: UITableViewDelegate {
+//    public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 
+//    }
+//}

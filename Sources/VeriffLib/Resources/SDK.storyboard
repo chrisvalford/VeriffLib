@@ -18,23 +18,60 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2an-cP-0EO">
-                                <rect key="frame" x="20" y="261" width="374" height="374"/>
+                                <rect key="frame" x="20" y="44" width="374" height="374"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="374" id="1h5-TH-ZqV"/>
                                     <constraint firstAttribute="width" constant="374" id="7tN-sD-K7j"/>
                                 </constraints>
                             </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="jRd-cz-snB">
+                                <rect key="frame" x="20" y="426" width="374" height="436"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DocumentTextCell" id="rLe-Lr-Ntl" customClass="ScanDocumentTableViewCell" customModule="VeriffLib">
+                                        <rect key="frame" x="0.0" y="44.5" width="374" height="61"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rLe-Lr-Ntl" id="ebH-0F-Cam">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="61"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qab-ZX-E24">
+                                                    <rect key="frame" x="20" y="20" width="334" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Qab-ZX-E24" firstAttribute="leading" secondItem="ebH-0F-Cam" secondAttribute="leading" constant="20" symbolic="YES" id="Kbh-mr-QJh"/>
+                                                <constraint firstItem="Qab-ZX-E24" firstAttribute="top" secondItem="ebH-0F-Cam" secondAttribute="top" constant="20" symbolic="YES" id="XYb-aN-J0G"/>
+                                                <constraint firstAttribute="bottom" secondItem="Qab-ZX-E24" secondAttribute="bottom" constant="20" symbolic="YES" id="qU3-ad-Aco"/>
+                                                <constraint firstAttribute="trailing" secondItem="Qab-ZX-E24" secondAttribute="trailing" constant="20" symbolic="YES" id="w6Z-cC-AiK"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="7xU-sW-Pkw" id="am9-f5-0Wg"/>
+                                    <outlet property="delegate" destination="7xU-sW-Pkw" id="Avf-Ov-x2Q"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KuA-6O-GwB"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="2an-cP-0EO" firstAttribute="centerY" secondItem="7WI-eb-JD0" secondAttribute="centerY" id="OcH-Ph-SrL"/>
                             <constraint firstItem="2an-cP-0EO" firstAttribute="centerX" secondItem="7WI-eb-JD0" secondAttribute="centerX" id="PAe-r7-8Rm"/>
+                            <constraint firstItem="KuA-6O-GwB" firstAttribute="trailing" secondItem="jRd-cz-snB" secondAttribute="trailing" constant="20" id="Zbc-T7-8VE"/>
+                            <constraint firstItem="jRd-cz-snB" firstAttribute="leading" secondItem="KuA-6O-GwB" secondAttribute="leading" constant="20" id="agN-Yb-qBe"/>
+                            <constraint firstItem="jRd-cz-snB" firstAttribute="top" secondItem="2an-cP-0EO" secondAttribute="bottom" constant="8" symbolic="YES" id="jwP-xU-2BD"/>
+                            <constraint firstItem="jRd-cz-snB" firstAttribute="bottom" secondItem="KuA-6O-GwB" secondAttribute="bottom" id="mkj-MG-Bex"/>
+                            <constraint firstItem="2an-cP-0EO" firstAttribute="top" secondItem="KuA-6O-GwB" secondAttribute="top" id="nQc-kn-m4f"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="O6B-tg-EMq"/>
                     <connections>
                         <outlet property="imageView" destination="2an-cP-0EO" id="0Zw-V6-QP2"/>
+                        <outlet property="tableView" destination="jRd-cz-snB" id="Vo4-U2-d26"/>
                         <segue destination="j95-QL-9Q7" kind="show" identifier="showDocumentResult" id="bl2-we-ZpC"/>
                     </connections>
                 </viewController>
