@@ -27,7 +27,7 @@ public class FaceResultViewController: UIViewController {
 //        delegate?.done()
 //        self.navigationController?.dismiss(animated: true)
 //    }
-//    
+//
 //    @IBAction func retakeTap(_ sender: UIButton) {
 //        delegate?.retake()
 //        self.navigationController?.dismiss(animated: true)
@@ -36,12 +36,12 @@ public class FaceResultViewController: UIViewController {
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let button = sender as? UIButton else { return }
         if segue.identifier == "unwindToScanFace" {
-            let destination = segue.destination as? ScanFaceViewController
+            let destination = segue.destination as! ScanFaceViewController
             switch ButtonTag(rawValue: button.tag) {
             case .done:
-                destination?.segueMessage = "done"
+                destination.segueMessage = "done"
             case .retake:
-                destination?.segueMessage = "retake"
+                destination.segueMessage = "retake"
             default:
                 return
             }

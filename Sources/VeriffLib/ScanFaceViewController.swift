@@ -191,10 +191,10 @@ extension ScanFaceViewController {
     
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showFaceResult" {
-            let destination = segue.destination as? FaceResultViewController
+            let destination = segue.destination as! FaceResultViewController
             guard let ciImage = self.ciImage else { return }
             let image = UIImage(ciImage: ciImage)
-            destination?.photoView?.image = image
+            destination.photoView?.image = image
 //            destination?.delegate = self
         }
     }
