@@ -16,17 +16,31 @@
                     <view key="view" contentMode="scaleToFill" id="7WI-eb-JD0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2an-cP-0EO">
+                                <rect key="frame" x="20" y="261" width="374" height="374"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="374" id="1h5-TH-ZqV"/>
+                                    <constraint firstAttribute="width" constant="374" id="7tN-sD-K7j"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="KuA-6O-GwB"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="2an-cP-0EO" firstAttribute="centerY" secondItem="7WI-eb-JD0" secondAttribute="centerY" id="OcH-Ph-SrL"/>
+                            <constraint firstItem="2an-cP-0EO" firstAttribute="centerX" secondItem="7WI-eb-JD0" secondAttribute="centerX" id="PAe-r7-8Rm"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="O6B-tg-EMq"/>
                     <connections>
+                        <outlet property="imageView" destination="2an-cP-0EO" id="0Zw-V6-QP2"/>
                         <segue destination="j95-QL-9Q7" kind="show" identifier="showDocumentResult" id="bl2-we-ZpC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xf2-XA-Ckh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-375" y="-58"/>
+            <point key="canvasLocation" x="-375.36231884057975" y="-58.258928571428569"/>
         </scene>
         <!--Document Result View Controller-->
         <scene sceneID="2aa-tf-oSt">

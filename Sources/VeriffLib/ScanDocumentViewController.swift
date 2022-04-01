@@ -16,6 +16,8 @@ public class ScanDocumentViewController: UIViewController {
     var textRecognitionRequest = VNRecognizeTextRequest()
     var faceRecognitionRequest = VNDetectFaceRectanglesRequest()
     var image: UIImage?
+    
+    @IBOutlet var imageView: UIImageView!
 
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,6 +77,7 @@ extension ScanDocumentViewController: VNDocumentCameraViewControllerDelegate {
         for pageNumber in 0 ..< scan.pageCount {
             let image = scan.imageOfPage(at: pageNumber)
             self.image = image
+            self.imageView.image = image
             processImage(image: image)
         }
         self.dismiss(animated: true)
