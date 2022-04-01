@@ -9,7 +9,7 @@ import AVFoundation
 import UIKit
 import Vision
 
-public class ScanFaceDetectionViewController: UIViewController {
+public class ScanFaceViewController: UIViewController {
     var sequenceHandler = VNSequenceRequestHandler()
     
     @IBOutlet var faceView: FaceView!
@@ -43,7 +43,7 @@ public class ScanFaceDetectionViewController: UIViewController {
     }
 }
 
-extension ScanFaceDetectionViewController {
+extension ScanFaceViewController {
     func configureCaptureSession() {
         guard let camera = AVCaptureDevice.default(.builtInWideAngleCamera,
                                                    for: .video,
@@ -69,7 +69,7 @@ extension ScanFaceDetectionViewController {
     }
 }
 
-extension ScanFaceDetectionViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
+extension ScanFaceViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     public func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
             return
@@ -91,7 +91,7 @@ extension ScanFaceDetectionViewController: AVCaptureVideoDataOutputSampleBufferD
     }
 }
 
-extension ScanFaceDetectionViewController {
+extension ScanFaceViewController {
     func convert(rect: CGRect) -> CGRect {
         let origin = previewLayer.layerPointConverted(fromCaptureDevicePoint: rect.origin)
         let size = previewLayer.layerPointConverted(fromCaptureDevicePoint: rect.size.cgPoint)
@@ -177,7 +177,7 @@ extension ScanFaceDetectionViewController {
     }
 }
 
-extension ScanFaceDetectionViewController {
+extension ScanFaceViewController {
     @IBAction func cameraTap(_ sender: UIButton) {
         // Save the photo and face landmark data
         self.session.stopRunning()
