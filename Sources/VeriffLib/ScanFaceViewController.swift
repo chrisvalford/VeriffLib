@@ -198,7 +198,7 @@ extension ScanFaceViewController {
         let storyboard = UIStoryboard(name: "SDK", bundle: Bundle.module)
         guard let faceResultViewController = storyboard.instantiateViewController(withIdentifier: "faceResultViewController") as? FaceResultViewController else { return }
         faceResultViewController.delegate = self
-        navigationController?.pushViewController(faceResultViewController, animated: true)
+        navigationController?.show(faceResultViewController, sender: self)
     }
     
     private func takeSnapshot() {
