@@ -184,6 +184,9 @@ extension ScanFaceViewController {
 extension ScanFaceViewController {
     @IBAction func cameraTap(_ sender: UIButton) {
         // Save the photo and face landmark data
+        let storyboard = UIStoryboard(name: "SDK", bundle: Bundle.module)
+        guard let faceResultViewController = storyboard.instantiateViewController(withIdentifier: "faceResultViewController") as? FaceResultViewController else { return }
+        navigationController?.pushViewController(faceResultViewController, animated: true)
         self.session.stopRunning()
         takeSnapshot()
     }
