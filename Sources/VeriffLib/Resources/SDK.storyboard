@@ -226,6 +226,9 @@
                             <constraint firstItem="JjU-Y0-qdF" firstAttribute="trailing" secondItem="B2J-dU-yax" secondAttribute="trailing" constant="20" id="xF3-gg-r7c"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="photoView" destination="kqS-Jr-e35" id="U3A-ki-3WC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zoy-nE-Oks" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

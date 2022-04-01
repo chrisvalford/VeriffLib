@@ -40,6 +40,10 @@ public class ScanFaceViewController: UIViewController {
         maxY = view.bounds.maxY
         session.startRunning()
         photoView.isHidden = true
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        photoView.isUserInteractionEnabled = true
+        photoView.addGestureRecognizer(tapGestureRecognizer)
     }
 }
 
@@ -186,6 +190,11 @@ extension ScanFaceViewController {
     
     @IBAction func saveTap(_ sender: UIButton) {
         saveData()
+    }
+    
+    @objc
+    func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        print("Open result view")
     }
     
     private func takeSnapshot() {
