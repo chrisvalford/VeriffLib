@@ -183,7 +183,23 @@ extension ScanFaceViewController {
     }
 }
 
+// MARK: Navigation
 extension ScanFaceViewController {
+    
+    public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showFaceResult" {
+            let destination = segue.destination as? FaceResultViewController
+            guard let ciImage = self.ciImage else { return }
+            let image = UIImage(ciImage: ciImage)
+            destination?.photoView?.image = image
+            destination?.delegate = self
+        }
+    }
+    
+//    public override func performSegue(withIdentifier identifier: String, sender: Any?) {
+//        <#code#>
+//    }
+    
     @IBAction func cameraTap(_ sender: UIButton) {
         self.session.stopRunning()
         takeSnapshot()
@@ -195,13 +211,14 @@ extension ScanFaceViewController {
     
     @objc
     func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-        let storyboard = UIStoryboard(name: "SDK", bundle: Bundle.module)
-        guard let faceResultViewController = storyboard.instantiateViewController(withIdentifier: "faceResultViewController") as? FaceResultViewController else { return }
-        faceResultViewController.delegate = self
-        guard let ciImage = self.ciImage else { return }
-        let image = UIImage(ciImage: ciImage)
-        faceResultViewController.photoView?.image = image
-        navigationController?.present(faceResultViewController, animated: true)
+        performSegue(withIdentifier: "showFaceResult", sender: self)
+//        let storyboard = UIStoryboard(name: "SDK", bundle: Bundle.module)
+//        guard let faceResultViewController = storyboard.instantiateViewController(withIdentifier: "faceResultViewController") as? FaceResultViewController else { return }
+       // faceResultViewController.delegate = self
+//        guard let ciImage = self.ciImage else { return }
+//        let image = UIImage(ciImage: ciImage)
+//        faceResultViewController.photoView?.image = image
+//        navigationController?.present(faceResultViewController, animated: true)
     }
     
     private func takeSnapshot() {

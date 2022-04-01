@@ -20,6 +20,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="O6B-tg-EMq"/>
+                    <connections>
+                        <segue destination="j95-QL-9Q7" kind="show" identifier="showDocumentResult" id="bl2-we-ZpC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xf2-XA-Ckh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -30,11 +33,11 @@
             <objects>
                 <viewController storyboardIdentifier="documentResultViewController" id="j95-QL-9Q7" customClass="DocumentResultViewController" customModule="VeriffLib" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7sf-Ru-M5k">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LFr-GI-QS1">
-                                <rect key="frame" x="20" y="385" width="374" height="426"/>
+                                <rect key="frame" x="20" y="385" width="374" height="406"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -66,7 +69,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bMI-kl-eSh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="570" y="-64"/>
+            <point key="canvasLocation" x="570" y="-58"/>
         </scene>
         <!--Scan Face View Controller-->
         <scene sceneID="hbR-P4-AJ0">
@@ -154,6 +157,7 @@
                         <outlet property="faceView" destination="L3h-nA-dhp" id="sPC-uL-gXf"/>
                         <outlet property="photoView" destination="SAv-tG-4fb" id="jdb-oV-iEs"/>
                         <outlet property="saveButton" destination="7I2-Pc-PlE" id="Bbx-3r-vlT"/>
+                        <segue destination="jo9-pX-05J" kind="show" identifier="showFaceResult" id="KPJ-2t-XO8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sO2-ue-QZ4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -166,14 +170,14 @@
             <objects>
                 <viewController storyboardIdentifier="faceResultViewController" id="jo9-pX-05J" customClass="FaceResultViewController" customModule="VeriffLib" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ayf-rn-rx2">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kqS-Jr-e35">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B2J-dU-yax">
-                                <rect key="frame" x="20" y="799" width="374" height="63"/>
+                                <rect key="frame" x="20" y="779" width="374" height="63"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qdp-dZ-Sam">
                                         <rect key="frame" x="12" y="16.5" width="80" height="30"/>
@@ -238,6 +242,7 @@
                             <constraint firstItem="JjU-Y0-qdF" firstAttribute="trailing" secondItem="B2J-dU-yax" secondAttribute="trailing" constant="20" id="xF3-gg-r7c"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Sgq-Fr-QhZ"/>
                     <connections>
                         <outlet property="photoView" destination="kqS-Jr-e35" id="U3A-ki-3WC"/>
                     </connections>
