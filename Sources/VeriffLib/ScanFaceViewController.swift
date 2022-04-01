@@ -33,6 +33,9 @@ public class ScanFaceViewController: UIViewController {
     var ciImage: CIImage?
     var landmarkObservation: VNFaceObservation?
     
+    // Unwind segue message
+    var segueMessage = ""
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
         configureCaptureSession()
@@ -192,26 +195,36 @@ extension ScanFaceViewController {
             guard let ciImage = self.ciImage else { return }
             let image = UIImage(ciImage: ciImage)
             destination?.photoView?.image = image
-            destination?.delegate = self
+//            destination?.delegate = self
         }
     }
     
     @IBAction func unwindToScanFace(_ unwindSegue: UIStoryboardSegue) {
-        
+        if segueMessage == "dome" {
+            saveButton.isEnabled = true
+            //self.navigationController?.dismiss(animated: true)
+//            presentingViewController?.dismiss(animated: true)
+        } else if segueMessage == "retake" {
+            saveButton.isEnabled = false
+            photoView.image = nil
+            self.session.startRunning()
+            //self.navigationController?.dismiss(animated: true)
+//            presentingViewController?.dismiss(animated: true)
+        }
     }
     
 //    public override func performSegue(withIdentifier identifier: String, sender: Any?) {
 //        <#code#>
 //    }
     
-//    @IBAction func cameraTap(_ sender: UIButton) {
-//        self.session.stopRunning()
-//        takeSnapshot()
-//    }
-//
-//    @IBAction func saveTap(_ sender: UIButton) {
-//        saveData()
-//    }
+    @IBAction func cameraTap(_ sender: UIButton) {
+        self.session.stopRunning()
+        takeSnapshot()
+    }
+
+    @IBAction func saveTap(_ sender: UIButton) {
+        saveData()
+    }
     
     @objc
     func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
@@ -247,19 +260,19 @@ extension ScanFaceViewController {
     }
 }
 
-extension ScanFaceViewController: FaceResultDelegate {
-    func done() {
-        saveButton.isEnabled = true
-        //self.navigationController?.dismiss(animated: true)
-        presentingViewController?.dismiss(animated: true)
-    }
+//extension ScanFaceViewController: FaceResultDelegate {
+//    func done() {
+//        saveButton.isEnabled = true
+//        //self.navigationController?.dismiss(animated: true)
+//        presentingViewController?.dismiss(animated: true)
+//    }
     
-    func retake() {
-        saveButton.isEnabled = false
-        photoView.image = nil
-        self.session.startRunning()
-        //self.navigationController?.dismiss(animated: true)
-        presentingViewController?.dismiss(animated: true)
-    }
-}
+//    func retake() {
+//        saveButton.isEnabled = false
+//        photoView.image = nil
+//        self.session.startRunning()
+//        //self.navigationController?.dismiss(animated: true)
+//        presentingViewController?.dismiss(animated: true)
+//    }
+//}
 
