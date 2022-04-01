@@ -173,8 +173,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kqS-Jr-e35">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="kqS-Jr-e35">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B2J-dU-yax">
                                 <rect key="frame" x="20" y="779" width="374" height="63"/>
@@ -196,7 +197,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="doneTap:" destination="jo9-pX-05J" eventType="touchUpInside" id="duz-Kj-0Uo"/>
+                                            <segue destination="3HG-Ji-DVg" kind="unwind" unwindAction="unwindToScanFace:" id="aUl-sZ-PUr"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LyD-zE-4Dg">
@@ -216,7 +217,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="retakeTap:" destination="jo9-pX-05J" eventType="touchUpInside" id="bex-3H-gZp"/>
+                                            <segue destination="3HG-Ji-DVg" kind="unwind" unwindAction="unwindToScanFace:" id="zAK-Hm-Sza"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -248,12 +249,14 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zoy-nE-Oks" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="3HG-Ji-DVg" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="569.56521739130437" y="596.65178571428567"/>
         </scene>
     </scenes>
     <resources>
         <image name="CameraButton" width="198" height="198"/>
+        <image name="Placeholder" width="320" height="320"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

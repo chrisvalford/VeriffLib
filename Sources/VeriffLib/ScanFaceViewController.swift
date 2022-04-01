@@ -196,18 +196,22 @@ extension ScanFaceViewController {
         }
     }
     
+    @IBAction func unwindToScanFace(_ unwindSegue: UIStoryboardSegue) {
+        
+    }
+    
 //    public override func performSegue(withIdentifier identifier: String, sender: Any?) {
 //        <#code#>
 //    }
     
-    @IBAction func cameraTap(_ sender: UIButton) {
-        self.session.stopRunning()
-        takeSnapshot()
-    }
-    
-    @IBAction func saveTap(_ sender: UIButton) {
-        saveData()
-    }
+//    @IBAction func cameraTap(_ sender: UIButton) {
+//        self.session.stopRunning()
+//        takeSnapshot()
+//    }
+//
+//    @IBAction func saveTap(_ sender: UIButton) {
+//        saveData()
+//    }
     
     @objc
     func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
