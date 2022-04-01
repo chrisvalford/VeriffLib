@@ -37,7 +37,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LFr-GI-QS1">
-                                <rect key="frame" x="20" y="385" width="374" height="406"/>
+                                <rect key="frame" x="20" y="385" width="374" height="384"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -48,15 +48,25 @@
                                     <constraint firstAttribute="height" constant="312" id="HqN-rW-tNX"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ukb-bb-4hh">
+                                <rect key="frame" x="24" y="777" width="59" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Done"/>
+                                <connections>
+                                    <action selector="doneTapWith_sender:" destination="j95-QL-9Q7" eventType="touchUpInside" id="qO6-01-TsK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="tzj-kw-tFC"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="tzj-kw-tFC" firstAttribute="bottom" secondItem="ukb-bb-4hh" secondAttribute="bottom" constant="34" id="19x-yf-aUL"/>
                             <constraint firstItem="tzj-kw-tFC" firstAttribute="trailing" secondItem="f4D-6T-HgP" secondAttribute="trailing" constant="20" id="55i-zq-9rc"/>
                             <constraint firstItem="LFr-GI-QS1" firstAttribute="top" secondItem="f4D-6T-HgP" secondAttribute="bottom" constant="29" id="5zM-oS-tQt"/>
                             <constraint firstItem="f4D-6T-HgP" firstAttribute="top" secondItem="tzj-kw-tFC" secondAttribute="top" id="9ov-x5-ase"/>
                             <constraint firstItem="LFr-GI-QS1" firstAttribute="leading" secondItem="tzj-kw-tFC" secondAttribute="leading" constant="20" id="Nqe-qk-olY"/>
-                            <constraint firstItem="tzj-kw-tFC" firstAttribute="bottom" secondItem="LFr-GI-QS1" secondAttribute="bottom" constant="51" id="oyR-Dc-rVU"/>
+                            <constraint firstItem="ukb-bb-4hh" firstAttribute="top" secondItem="LFr-GI-QS1" secondAttribute="bottom" constant="8" symbolic="YES" id="YGy-pd-sYK"/>
+                            <constraint firstItem="ukb-bb-4hh" firstAttribute="leading" secondItem="tzj-kw-tFC" secondAttribute="leading" constant="24" id="by0-PY-erp"/>
                             <constraint firstItem="tzj-kw-tFC" firstAttribute="trailing" secondItem="LFr-GI-QS1" secondAttribute="trailing" constant="20" id="rdv-hg-XyN"/>
                             <constraint firstItem="f4D-6T-HgP" firstAttribute="leading" secondItem="tzj-kw-tFC" secondAttribute="leading" constant="20" id="vUp-VD-b1S"/>
                         </constraints>
@@ -69,7 +79,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bMI-kl-eSh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="570" y="-58"/>
+            <point key="canvasLocation" x="569.56521739130437" y="-58.258928571428569"/>
         </scene>
         <!--Scan Face View Controller-->
         <scene sceneID="hbR-P4-AJ0">
