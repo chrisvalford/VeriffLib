@@ -5,37 +5,28 @@
 //  Created by Christopher Alford on 30/3/22.
 //
 
+import AVFoundation
 import UIKit
-import VisionKit
 import Vision
+import VisionKit
 
 public class ScanDocumentViewController: UIViewController {
-    
-    var resultsViewController: DocumentResultViewController?
     let documentCameraViewController = VNDocumentCameraViewController()
-    var textRecognitionRequest = VNRecognizeTextRequest()
-    var faceRecognitionRequest = VNDetectFaceRectanglesRequest()
+    private var textRecognitionRequest = VNRecognizeTextRequest()
+    private var faceRecognitionRequest = VNDetectFaceRectanglesRequest()
     
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var tableView: UITableView!
     
+    private var image: UIImage?
     private var documentTexts: [String] = []
-
+    private var recognizedFaces: [VNFaceObservation] = []
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
-//        let storyboard = UIStoryboard(name: "SDK", bundle: .module)
-//        resultsViewController = storyboard.instantiateViewController(withIdentifier: "documentResultViewController") as? DocumentResultViewController
         textRecognitionRequest = VNRecognizeTextRequest(completionHandler: { (request, error) in
-//            guard let resultsViewController = self.resultsViewController else {
-//                print("resultsViewController is not set")
-//                return
-//            }
             if let results = request.results, !results.isEmpty {
                 if let requestResults = request.results as? [VNRecognizedTextObservation] {
-//                    DispatchQueue.main.async {
-//                        resultsViewController.addRecognizedText(recognizedText: requestResults)
-//                    }
-                    // Create a full transcript to run analysis on.
                     let maximumCandidates = 1
                     for observation in requestResults {
                         guard let candidate = observation.topCandidates(maximumCandidates).first else { continue }
@@ -48,19 +39,36 @@ public class ScanDocumentViewController: UIViewController {
         textRecognitionRequest.recognitionLevel = .accurate
         textRecognitionRequest.usesLanguageCorrection = true
         faceRecognitionRequest = VNDetectFaceRectanglesRequest(completionHandler: { (request, error) in
-            guard let resultsViewController = self.resultsViewController else {
-                print("resultsViewController is not set")
-                return
-            }
-            guard let requestResults = request.results as? [VNFaceObservation] else {
+            guard let requestResults = request.results as? [VNFaceObservation],
+                  let image = self.image else {
                 return
             }
             
             DispatchQueue.main.async {
-                resultsViewController.addRecognizedFaces(image: self.imageView.image, recognizedFaces: requestResults)
+                self.recognizedFaces = requestResults
+                if let sublayers = self.imageView.layer.sublayers {
+                    for layer in sublayers {
+                        layer.removeFromSuperlayer()
+                    }
+                }
+                let imageRect = AVMakeRect(aspectRatio: image.size, insideRect: self.imageView.bounds)
+                let layers: [CAShapeLayer] = self.recognizedFaces.map { face in
+                    let layer = CAShapeLayer()
+                    layer.frame = CGRect(x: face.boundingBox.origin.x * imageRect.width,
+                                         y: imageRect.maxY - (face.boundingBox.origin.y * imageRect.height) - face.boundingBox.size.height * imageRect.height,
+                                         width: face.boundingBox.size.width * imageRect.width,
+                                         height: face.boundingBox.size.height * imageRect.height)
+                    layer.borderColor = VeriffLib.faceboundsColor.cgColor
+                    layer.borderWidth = 2
+                    layer.cornerRadius = 3
+                    return layer
+                }
+                self.imageView.image = self.image
+                for layer in layers {
+                    self.imageView.layer.addSublayer(layer)
+                }
             }
         })
-        
         documentCameraViewController.delegate = self
         present(documentCameraViewController, animated: true)
     }
@@ -70,7 +78,6 @@ public class ScanDocumentViewController: UIViewController {
             print("Failed to get cgimage from input image")
             return
         }
-        
         let handler = VNImageRequestHandler(cgImage: cgImage, options: [:])
         do {
             try handler.perform([textRecognitionRequest])
@@ -85,7 +92,7 @@ extension ScanDocumentViewController: VNDocumentCameraViewControllerDelegate {
     public func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
         for pageNumber in 0 ..< scan.pageCount {
             let image = scan.imageOfPage(at: pageNumber)
-            self.imageView.image = image
+            self.image = image
             processImage(image: image)
         }
         self.dismiss(animated: true)
@@ -105,9 +112,3 @@ extension ScanDocumentViewController: UITableViewDataSource {
         return cell
     }
 }
-
-//extension ScanDocumentViewController: UITableViewDelegate {
-//    public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 
-//    }
-//}
