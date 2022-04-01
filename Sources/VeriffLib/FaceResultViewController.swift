@@ -20,10 +20,12 @@ public class FaceResultViewController: UIViewController {
     
     @IBAction func doneTap(_ sender: UIButton) {
         delegate?.done()
+        dismiss(animated: true)
     }
     
     @IBAction func retakeTap(_ sender: UIButton) {
         delegate?.retake()
+        dismiss(animated: true)
     }
     
 }

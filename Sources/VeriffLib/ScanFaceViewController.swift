@@ -14,6 +14,7 @@ public class ScanFaceViewController: UIViewController {
     
     @IBOutlet var faceView: FaceView!
     @IBOutlet var photoView: UIImageView!
+    @IBOutlet var saveButton: UIButton!
     
     let session = AVCaptureSession()
     var previewLayer: AVCaptureVideoPreviewLayer!
@@ -40,6 +41,7 @@ public class ScanFaceViewController: UIViewController {
         maxY = view.bounds.maxY
         session.startRunning()
         photoView.isHidden = true
+        saveButton.isEnabled = false
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         photoView.isUserInteractionEnabled = true
@@ -183,11 +185,6 @@ extension ScanFaceViewController {
 
 extension ScanFaceViewController {
     @IBAction func cameraTap(_ sender: UIButton) {
-        // Save the photo and face landmark data
-        let storyboard = UIStoryboard(name: "SDK", bundle: Bundle.module)
-        guard let faceResultViewController = storyboard.instantiateViewController(withIdentifier: "faceResultViewController") as? FaceResultViewController else { return }
-        faceResultViewController.delegate = self
-        navigationController?.pushViewController(faceResultViewController, animated: true)
         self.session.stopRunning()
         takeSnapshot()
     }
@@ -198,7 +195,10 @@ extension ScanFaceViewController {
     
     @objc
     func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-        print("Open result view")
+        let storyboard = UIStoryboard(name: "SDK", bundle: Bundle.module)
+        guard let faceResultViewController = storyboard.instantiateViewController(withIdentifier: "faceResultViewController") as? FaceResultViewController else { return }
+        faceResultViewController.delegate = self
+        navigationController?.pushViewController(faceResultViewController, animated: true)
     }
     
     private func takeSnapshot() {
@@ -219,11 +219,13 @@ extension ScanFaceViewController {
 
 extension ScanFaceViewController: FaceResultDelegate {
     func done() {
-        print("Done tapped - so enable save")
+        saveButton.isEnabled = true
     }
     
     func retake() {
-        print("Retake tapped -")
+        saveButton.isEnabled = false
+        photoView.image = nil
+        self.session.startRunning()
     }
     
     
