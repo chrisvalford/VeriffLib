@@ -100,9 +100,6 @@
                                             <constraint firstAttribute="height" constant="68" id="VKb-77-qfz"/>
                                         </constraints>
                                         <state key="normal" image="CameraButton"/>
-                                        <connections>
-                                            <action selector="cameraTap:" destination="MGt-h0-ViO" eventType="touchUpInside" id="DKj-1J-AM8"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7I2-Pc-PlE">
                                         <rect key="frame" x="302" y="49" width="80" height="30"/>
@@ -119,9 +116,6 @@
                                                 <real key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="saveTap:" destination="MGt-h0-ViO" eventType="touchUpInside" id="jyo-Sk-1Dd"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
