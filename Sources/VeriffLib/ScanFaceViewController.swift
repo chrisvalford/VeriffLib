@@ -198,6 +198,9 @@ extension ScanFaceViewController {
         let storyboard = UIStoryboard(name: "SDK", bundle: Bundle.module)
         guard let faceResultViewController = storyboard.instantiateViewController(withIdentifier: "faceResultViewController") as? FaceResultViewController else { return }
         faceResultViewController.delegate = self
+        guard let ciImage = self.ciImage else { return }
+        let image = UIImage(ciImage: ciImage)
+        faceResultViewController.photoView?.image = image
         navigationController?.present(faceResultViewController, animated: true)
     }
     
@@ -213,7 +216,13 @@ extension ScanFaceViewController {
               let ciImage = self.ciImage else { return }
         let image = UIImage(ciImage: ciImage)
         guard let data = image.pngData() else { return }
-        VerifyRemote.verifyIdentity(image: data, landMarks: landmarks)
+        VerifyRemote.verifyIdentity(image: data, landMarks: landmarks, completion: { (state, error) in
+            if (error != nil) {
+                print("Error whilst verifing")
+                return
+            }
+            print(state)
+        })
     }
 }
 
@@ -229,7 +238,5 @@ extension ScanFaceViewController: FaceResultDelegate {
         self.session.startRunning()
         self.navigationController?.dismiss(animated: true)
     }
-    
-    
 }
 
