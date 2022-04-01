@@ -19,7 +19,7 @@ public class ScanFaceViewController: UIViewController {
     let session = AVCaptureSession()
     var previewLayer: AVCaptureVideoPreviewLayer!
     let dataOutputQueue = DispatchQueue(
-        label: "video data queue",
+        label: "com.anapp4that.verifflib",
         qos: .userInitiated,
         attributes: [],
         autoreleaseFrequency: .workItem)
@@ -54,6 +54,7 @@ extension ScanFaceViewController {
         guard let camera = AVCaptureDevice.default(.builtInWideAngleCamera,
                                                    for: .video,
                                                    position: .front) else {
+            // TODO: Change for error in callback
             fatalError("No front video camera available")
         }
         do {
@@ -236,7 +237,7 @@ extension ScanFaceViewController {
                 return
             }
             print(state)
+            navigationController?.dismiss(animated: true)
         })
     }
 }
-
