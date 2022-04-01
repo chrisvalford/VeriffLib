@@ -229,14 +229,16 @@ extension ScanFaceViewController {
 extension ScanFaceViewController: FaceResultDelegate {
     func done() {
         saveButton.isEnabled = true
-        self.navigationController?.dismiss(animated: true)
+        //self.navigationController?.dismiss(animated: true)
+        presentingViewController?.dismiss(animated: true)
     }
     
     func retake() {
         saveButton.isEnabled = false
         photoView.image = nil
         self.session.startRunning()
-        self.navigationController?.dismiss(animated: true)
+        //self.navigationController?.dismiss(animated: true)
+        presentingViewController?.dismiss(animated: true)
     }
 }
 
