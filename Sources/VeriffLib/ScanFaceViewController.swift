@@ -237,7 +237,7 @@ extension ScanFaceViewController {
                 return
             }
             print(state)
-            navigationController?.dismiss(animated: true)
+            self.dismiss(animated: true)
         })
     }
 }
