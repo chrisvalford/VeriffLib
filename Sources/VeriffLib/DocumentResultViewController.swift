@@ -50,7 +50,7 @@ public class DocumentResultViewController: UIViewController {
         }
     }
     
-    @IBAction func doneTap(_sender: UIButton) {
+    @IBAction func doneTap(_ sender: UIButton) {
         self.navigationController?.popToRootViewController(animated: true) //dismiss(animated: true)
     }
 }
