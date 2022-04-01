@@ -186,6 +186,7 @@ extension ScanFaceViewController {
         // Save the photo and face landmark data
         let storyboard = UIStoryboard(name: "SDK", bundle: Bundle.module)
         guard let faceResultViewController = storyboard.instantiateViewController(withIdentifier: "faceResultViewController") as? FaceResultViewController else { return }
+        faceResultViewController.delegate = self
         navigationController?.pushViewController(faceResultViewController, animated: true)
         self.session.stopRunning()
         takeSnapshot()
@@ -214,5 +215,17 @@ extension ScanFaceViewController {
         guard let data = image.pngData() else { return }
         VerifyRemote.verifyIdentity(image: data, landMarks: landmarks)
     }
+}
+
+extension ScanFaceViewController: FaceResultDelegate {
+    func done() {
+        print("Done tapped - so enable save")
+    }
+    
+    func retake() {
+        print("Retake tapped -")
+    }
+    
+    
 }
 
