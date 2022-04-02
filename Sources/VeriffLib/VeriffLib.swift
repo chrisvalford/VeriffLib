@@ -1,5 +1,12 @@
 import UIKit
-import UniformTypeIdentifiers
+//import UniformTypeIdentifiers
+import Vision
+
+// Notification identifiers
+let faceDetectionCompletionKey = "com.anapp4that.faceDetectionCompletion"
+let documentDetectionCompletionKey = "com.anapp4that.documentDetectionCompletion"
+let faceCompletionNotification = Notification.Name(rawValue: faceDetectionCompletionKey)
+let documentCompletionNotification = Notification.Name(rawValue: documentDetectionCompletionKey)
 
 public struct VeriffLib {
     
@@ -14,4 +21,7 @@ public struct VeriffLib {
     public static var placeholderImage: UIImage = UIImage(named: "Placeholder", in: libBundle, with: nil)!
 }
 
-
+struct FaceData {
+    let image: UIImage
+    let landmarks: VNFaceObservation
+}

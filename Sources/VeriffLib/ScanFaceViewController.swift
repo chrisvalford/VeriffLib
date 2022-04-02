@@ -231,12 +231,16 @@ extension ScanFaceViewController {
               let ciImage = self.ciImage else { return }
         let image = UIImage(ciImage: ciImage)
         guard let data = image.pngData() else { return }
+        
+        // TODO: Update this when adding the verification choice code
+        let faceData = FaceData(image: image, landmarks: landmarks)
+        let userInfo = ["faceData": faceData]
+        NotificationCenter.default.post(name: faceCompletionNotification, object: nil, userInfo: userInfo)
         VerifyRemote.verifyIdentity(image: data, landMarks: landmarks, completion: { (state, error) in
             if (error != nil) {
                 print("Error whilst verifing")
                 return
             }
-            print(state)
             self.dismiss(animated: true)
         })
     }
