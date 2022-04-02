@@ -9,16 +9,17 @@ import AVFoundation
 import UIKit
 import Vision
 
-public class ScanFaceDetectionViewController: UIViewController {
+public class ScanFaceViewController: UIViewController {
     var sequenceHandler = VNSequenceRequestHandler()
     
     @IBOutlet var faceView: FaceView!
     @IBOutlet var photoView: UIImageView!
+    @IBOutlet var saveButton: UIButton!
     
     let session = AVCaptureSession()
     var previewLayer: AVCaptureVideoPreviewLayer!
     let dataOutputQueue = DispatchQueue(
-        label: "video data queue",
+        label: "com.anapp4that.verifflib",
         qos: .userInitiated,
         attributes: [],
         autoreleaseFrequency: .workItem)
@@ -40,14 +41,20 @@ public class ScanFaceDetectionViewController: UIViewController {
         maxY = view.bounds.maxY
         session.startRunning()
         photoView.isHidden = true
+        saveButton.isEnabled = false
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        photoView.isUserInteractionEnabled = true
+        photoView.addGestureRecognizer(tapGestureRecognizer)
     }
 }
 
-extension ScanFaceDetectionViewController {
+extension ScanFaceViewController {
     func configureCaptureSession() {
         guard let camera = AVCaptureDevice.default(.builtInWideAngleCamera,
                                                    for: .video,
                                                    position: .front) else {
+            // TODO: Change for error in callback
             fatalError("No front video camera available")
         }
         do {
@@ -69,7 +76,7 @@ extension ScanFaceDetectionViewController {
     }
 }
 
-extension ScanFaceDetectionViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
+extension ScanFaceViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     public func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
             return
@@ -91,7 +98,7 @@ extension ScanFaceDetectionViewController: AVCaptureVideoDataOutputSampleBufferD
     }
 }
 
-extension ScanFaceDetectionViewController {
+extension ScanFaceViewController {
     func convert(rect: CGRect) -> CGRect {
         let origin = previewLayer.layerPointConverted(fromCaptureDevicePoint: rect.origin)
         let size = previewLayer.layerPointConverted(fromCaptureDevicePoint: rect.size.cgPoint)
@@ -177,15 +184,39 @@ extension ScanFaceDetectionViewController {
     }
 }
 
-extension ScanFaceDetectionViewController {
+// MARK: Navigation
+extension ScanFaceViewController {
+    public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showFaceResult" {
+            let destination = segue.destination as! FaceResultViewController
+            guard let ciImage = self.ciImage else { return }
+            let image = UIImage(ciImage: ciImage)
+            destination.image = image
+        }
+    }
+    
+    @IBAction func unwindDoneToScanFace(_ unwindSegue: UIStoryboardSegue) {
+            saveButton.isEnabled = true
+        }
+    
+    @IBAction func unwindRetakeToScanFace(_ unwindSegue: UIStoryboardSegue) {
+            saveButton.isEnabled = false
+            photoView.image = nil
+            self.session.startRunning()
+    }
+    
     @IBAction func cameraTap(_ sender: UIButton) {
-        // Save the photo and face landmark data
         self.session.stopRunning()
         takeSnapshot()
     }
-    
+
     @IBAction func saveTap(_ sender: UIButton) {
         saveData()
+    }
+    
+    @objc
+    func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        performSegue(withIdentifier: "showFaceResult", sender: self)
     }
     
     private func takeSnapshot() {
@@ -200,7 +231,13 @@ extension ScanFaceDetectionViewController {
               let ciImage = self.ciImage else { return }
         let image = UIImage(ciImage: ciImage)
         guard let data = image.pngData() else { return }
-        VerifyRemote.verifyIdentity(image: data, landMarks: landmarks)
+        VerifyRemote.verifyIdentity(image: data, landMarks: landmarks, completion: { (state, error) in
+            if (error != nil) {
+                print("Error whilst verifing")
+                return
+            }
+            print(state)
+            self.dismiss(animated: true)
+        })
     }
 }
-

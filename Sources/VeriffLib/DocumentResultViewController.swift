@@ -49,6 +49,10 @@ public class DocumentResultViewController: UIViewController {
             sourceImageView.layer.addSublayer(layer)
         }
     }
+    
+    @IBAction func doneTap(_ sender: UIButton) {
+        dismiss(animated: true)
+    }
 }
 
 // MARK: RecognizedTextDataSource

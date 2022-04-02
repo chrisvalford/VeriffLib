@@ -8,22 +8,14 @@
 import UIKit
 import Vision
 
-protocol FaceResultDelegate {
-    func done()
-    func retake()
-}
-
 public class FaceResultViewController: UIViewController {
     
-    var delegate: FaceResultDelegate?
     @IBOutlet var photoView: UIImageView?
+    var image: UIImage?
     
-    @IBAction func doneTap(_ sender: UIButton) {
-        delegate?.done()
+    public override func viewDidLoad() {
+        if image != nil {
+            photoView?.image = image
+        }
     }
-    
-    @IBAction func retakeTap(_ sender: UIButton) {
-        delegate?.retake()
-    }
-    
 }

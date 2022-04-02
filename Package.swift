@@ -25,8 +25,8 @@ let package = Package(
             name: "VeriffLib",
             dependencies: [],
             resources: [
-                .process("SDK.storyboard"),
-                .copy("Media.xcassets")
+                .process("Resources/SDK.storyboard"),
+                .copy("Resources/Media.xcassets")
             ]),
         .testTarget(
             name: "VeriffLibTests",
