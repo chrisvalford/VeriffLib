@@ -21,7 +21,7 @@ public struct VeriffLib {
     public static var placeholderImage: UIImage = UIImage(named: "Placeholder", in: libBundle, with: nil)!
 }
 
-struct FaceData {
+public struct FaceData {
     let image: UIImage
     let landmarks: VNFaceObservation
 }
