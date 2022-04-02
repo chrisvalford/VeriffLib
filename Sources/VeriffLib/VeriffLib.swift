@@ -22,6 +22,6 @@ public struct VeriffLib {
 }
 
 public struct FaceData {
-    let image: UIImage
-    let landmarks: VNFaceObservation
+    public let image: UIImage
+    public let landmarks: VNFaceObservation
 }
