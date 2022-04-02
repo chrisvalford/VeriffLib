@@ -5,8 +5,8 @@ import Vision
 // Notification identifiers
 let faceDetectionCompletionKey = "com.anapp4that.faceDetectionCompletion"
 let documentDetectionCompletionKey = "com.anapp4that.documentDetectionCompletion"
-let faceCompletionNotification = Notification.Name(rawValue: faceDetectionCompletionKey)
-let documentCompletionNotification = Notification.Name(rawValue: documentDetectionCompletionKey)
+public let faceCompletionNotification = Notification.Name(rawValue: faceDetectionCompletionKey)
+public let documentCompletionNotification = Notification.Name(rawValue: documentDetectionCompletionKey)
 
 public struct VeriffLib {
     
