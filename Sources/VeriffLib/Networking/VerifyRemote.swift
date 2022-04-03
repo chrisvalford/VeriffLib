@@ -8,14 +8,19 @@
 import Foundation
 import Vision
 
-enum VerifyState {
+public enum VerifyState {
     case verified
     case failed
 }
 
-class VerifyRemote {
-    class func verifyIdentity(image: Data, landMarks: VNFaceObservation, completion: (VerifyState, Error?) -> Void) {
+public class VerifyRemote {
+    public class func verifyIdentity(imageData: Data, landMarks: VNFaceObservation, completion: (VerifyState, Error?) -> Void) {
         print("Verifying face data")
+        completion(.verified, nil)
+    }
+    
+    public class func verifyDocument(imageData: Data, texts: [String], completion: (VerifyState, Error?) -> Void) {
+        print("Verifying document data")
         completion(.verified, nil)
     }
 }

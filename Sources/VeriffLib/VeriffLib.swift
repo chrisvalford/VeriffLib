@@ -3,10 +3,12 @@ import UIKit
 import Vision
 
 // Notification identifiers
-let faceDetectionCompletionKey = "com.anapp4that.faceDetectionCompletion"
-let documentDetectionCompletionKey = "com.anapp4that.documentDetectionCompletion"
-public let faceCompletionNotification = Notification.Name(rawValue: faceDetectionCompletionKey)
-public let documentCompletionNotification = Notification.Name(rawValue: documentDetectionCompletionKey)
+//let faceDetectionCompletionKey = "com.anapp4that.faceDetectionCompletion"
+//let documentDetectionCompletionKey = "com.anapp4that.documentDetectionCompletion"
+//public let faceCompletionNotification = Notification.Name(rawValue: faceDetectionCompletionKey)
+//public let documentCompletionNotification = Notification.Name(rawValue: documentDetectionCompletionKey)
+
+public typealias faceDetectionCompleted = (_ imageData: Data?, _ error: Error?) -> Void
 
 public struct VeriffLib {
     
@@ -22,6 +24,7 @@ public struct VeriffLib {
 }
 
 public struct FaceData {
-    public let image: UIImage
+    public let imageData: Data
     public let landmarks: VNFaceObservation
+    public let type: String
 }
