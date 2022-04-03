@@ -10,7 +10,12 @@ import UIKit
 import Vision
 import VisionKit
 
+public protocol ScanDocumentDelegate: AnyObject {
+    func scanCompleted(imageData: Data, texts: [String])
+}
+
 public class ScanDocumentViewController: UIViewController {
+    public weak var delegate: ScanDocumentDelegate?
     let documentCameraViewController = VNDocumentCameraViewController()
     private var textRecognitionRequest = VNRecognizeTextRequest()
     private var faceRecognitionRequest = VNDetectFaceRectanglesRequest()
@@ -73,7 +78,7 @@ public class ScanDocumentViewController: UIViewController {
         present(documentCameraViewController, animated: true)
     }
     
-    func processImage(image: UIImage) {
+    func processDocument(image: UIImage) {
         guard let cgImage = image.cgImage else {
             print("Failed to get cgimage from input image")
             return
@@ -93,8 +98,10 @@ extension ScanDocumentViewController: VNDocumentCameraViewControllerDelegate {
         for pageNumber in 0 ..< scan.pageCount {
             let image = scan.imageOfPage(at: pageNumber)
             self.image = image
-            processImage(image: image)
+            processDocument(image: image)
         }
+        guard let imageData = image?.pngData() else { return }
+        self.delegate?.scanCompleted(imageData: imageData, texts: self.documentTexts)
         self.dismiss(animated: true)
     }
 }
