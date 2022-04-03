@@ -9,8 +9,14 @@ import AVFoundation
 import UIKit
 import Vision
 
+public protocol ScanFaceDelegate: AnyObject {
+    func scanCompleted(imageData: Data, landmarks: VNFaceObservation)
+}
+
 public class ScanFaceViewController: UIViewController {
+    public weak var delegate: ScanFaceDelegate?
     var sequenceHandler = VNSequenceRequestHandler()
+    var completion: faceDetectionCompleted?
     
     @IBOutlet var faceView: FaceView!
     @IBOutlet var photoView: UIImageView!
@@ -226,18 +232,12 @@ extension ScanFaceViewController {
         self.photoView.isHidden = false
     }
     
-    private func saveData() {
+    func saveData() {
         guard let landmarks = landmarkObservation,
               let ciImage = self.ciImage else { return }
         let image = UIImage(ciImage: ciImage)
         guard let data = image.pngData() else { return }
-        VerifyRemote.verifyIdentity(image: data, landMarks: landmarks, completion: { (state, error) in
-            if (error != nil) {
-                print("Error whilst verifing")
-                return
-            }
-            print(state)
-            self.dismiss(animated: true)
-        })
+        self.delegate?.scanCompleted(imageData: data, landmarks: landmarks)
+        self.dismiss(animated: true)
     }
 }
